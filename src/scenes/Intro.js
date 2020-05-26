@@ -5,10 +5,12 @@ export class Intro extends Phaser.Scene {
 
   preload = () => {
       this.load.image('background', 'assets/bg_space_seamless.png')
-      this.load.image('rocinante', 'assets/rocinante.png')
-      this.load.image('nauvoo', 'assets/nauvoo.png')
-      this.load.image('agatha', 'assets/agathaKing.png')
-      this.load.spritesheet('dude','assets/FighterPlaneV2.png',{ frameWidth: 32, frameHeight: 48 });
+
+      this.load.spritesheet('rocinante','assets/sprites/ship1.png',{ frameWidth: 16, frameHeight: 16 });
+      this.load.spritesheet('nauvoo','assets/sprites/ship2.png',{ frameWidth: 16, frameHeight: 16 });
+      this.load.spritesheet('agatha','assets/sprites/ship3.png',{ frameWidth: 16, frameHeight: 16 });
+      this.load.spritesheet('explosion','assets/sprites/explosion.png',{ frameWidth: 16, frameHeight: 16 });
+
     }
 
   create = () => {

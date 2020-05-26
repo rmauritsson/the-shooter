@@ -14,6 +14,43 @@ export class Game extends Phaser.Scene {
     this.agatha.setScale(2)
 
     this.background.tilePositionY -= 0.5
+
+    // animations
+    this.anims.create({
+      key: "rocinante_anim",
+      frames: this.anims.generateFrameNumbers("rocinante"),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: "nauvoo_anim",
+      frames: this.anims.generateFrameNumbers("nauvoo"),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: "agatha_anim",
+      frames: this.anims.generateFrameNumbers("agatha"),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: "explode",
+      frames: this.anims.generateFrameNumbers("explosion"),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true
+    });
+
+    this.rocinante.play("rocinante_anim")
+    this.nauvoo.play("nauvoo_anim")
+    this.agatha.play("agatha_anim")
+
+    this.rocinante.setInteractive();
+    this.nauvoo.setInteractive();
+    this.agatha.setInteractive();
+
+    this.input.on('gameobjectdown', this.destroyShip, this)
   }
 
   moveShip = (ship, speed) => {
@@ -27,6 +64,11 @@ export class Game extends Phaser.Scene {
     ship.y = 0
     const position = Phaser.Math.Between(0,800)
     ship.x = position
+  }
+
+  destroyShip = (pointer, gameObject) => {
+    gameObject.setTexture("explosion")
+    gameObject.play("explode")
   }
 
   update = () => {
