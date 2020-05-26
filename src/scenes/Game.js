@@ -4,13 +4,13 @@ export class Game extends Phaser.Scene {
   }
 
   create = () => {
-    this.add.image(400, 300, 'background');
+    this.background = this.add.tileSprite(400, 300, 800, 600, 'background');
 
     this.rocinante = this.add.image(350, 300, "rocinante")
     this.nauvoo = this.add.image(400, 300, "nauvoo")
     this.agatha = this.add.image(450, 300, "agatha")
 
-    this.add.text(100, 100, 'The Expanse!', { font: "25px",fill: '#0f0' });
+    this.background.tilePositionY -= 0.5
   }
 
   moveShip = (ship, speed) => {
