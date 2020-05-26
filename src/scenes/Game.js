@@ -3,6 +3,8 @@ import { Beam } from './Beam';
 export class Game extends Phaser.Scene {
   constructor() {
     super('playGame');
+    this.score = 0;
+    this.gameOver = false;
   }
 
   create = () => {
@@ -120,22 +122,42 @@ export class Game extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, null, this);
 
     this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
+
+    const graphics = this.add.graphics();
+    graphics.fillStyle(0x000000, 1);
+    graphics.beginPath();
+    graphics.moveTo(0, 0);
+    graphics.lineTo(800, 0);
+    graphics.lineTo(800, 20);
+    graphics.lineTo(0, 20);
+    graphics.lineTo(0, 0);
+
+    graphics.closePath();
+    graphics.fillPath();
+
+    this.gameLabel = this.add.text(20, 20, 'GAME OVER !', { font: '45px Arial' });
+    this.scoreLabel = this.add.bitmapText(10, 5, 'pixelFont', 'SCORE ', 24);
   }
 
   playerCollision =(player, debri) => {
-    player.setTexture('explosion');
-    player.play('explode');
+    // player.play("explode")
+    this.physics.pause();
+    // enemy.destroy();
   }
 
     hurtPlayer = (player, enemy) => {
       this.positionShip(enemy);
       player.x = 390;
       player.y = 336;
+      this.score -= 10;
+      this.scoreLabel.text = `SCORE ${this.score}`;
     }
 
     hitEnemy = (projectile, enemy) => {
       projectile.destroy();
       this.positionShip(enemy);
+      this.score += 10;
+      this.scoreLabel.text = `SCORE ${this.score}`;
     }
 
   movePlayer = () => {
