@@ -1,57 +1,51 @@
-# Project Name
+# The Expanse
 
-> One paragraph statement about the project.
+> A simple rpg game built using javascript and the game engine phaser, it follows the popular TV series the expanse.
 
 ![screenshot](./app_screenshot.png)
+
+## Live Demo
+
+[Live Demo](https://the-shooter-2020.herokuapp.com/)
+
 
 Additional description about the project and its features.
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
+- Javascript,
+- Phaser
 
 ## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
 
 To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
+- A running Server
 
 ### Setup
-
-### Install
+- Clone the repository using `git clone`
+- Extract the clone and place it in the webroot of your server
+- Start your server
+- Go to your browser and type `localhost` plus the port asigned to you eg `localhost:8080`
+- Start playing the game
 
 ### Usage
+- Click the play game button to play the game
+- The game has objectives that should be met
 
-### Run tests
+### Game Objectives
+- Use the space bar to shoot at enemy ships, and earn points
+- Collision with enemy ships will see you lose points
+- Collision with moving asteroids will lead to end of game
+- Shooting at the asteroids only moves it away but does not destroy it
 
-### Deployment
+## Author
 
+👤 **Leonard Rwai Kanyesigye**
 
-
-## Authors
-
-👤 **Author1**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@rmauritsson](https://github.com/rmauritsson)
+- Twitter: [@leokanye](https://twitter.com/leokanye)
 
 ## 🤝 Contributing
 
@@ -63,11 +57,16 @@ Feel free to check the [issues page](issues/).
 
 Give a ⭐️ if you like this project!
 
+##Inspiration
+
+The game objectives, design were inspired by the TV series the expanse
+
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Freecode Camp
+- Luis Zano articles
+- Phaser documentation
+- openmargart
 
 ## 📝 License
 
