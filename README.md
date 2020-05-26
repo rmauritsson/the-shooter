@@ -57,9 +57,9 @@ Feel free to check the [issues page](issues/).
 
 Give a ⭐️ if you like this project!
 
-##Inspiration
+## Inspiration
 
-The game objectives, design were inspired by the TV series the expanse
+The game objectives and design were inspired by the TV series the expanse
 
 ## Acknowledgments
 

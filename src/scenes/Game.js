@@ -60,6 +60,11 @@ export class Game extends Phaser.Scene {
       repeat: -1,
     });
 
+    this.enemies = this.physics.add.group();
+    this.enemies.add(this.rocinante);
+    this.enemies.add(this.nauvoo);
+    this.enemies.add(this.agatha);
+
     this.rocinante.play('rocinante_anim');
     this.nauvoo.play('nauvoo_anim');
     this.agatha.play('agatha_anim');
@@ -105,7 +110,33 @@ export class Game extends Phaser.Scene {
     });
 
     this.projectiles = this.add.group();
+
+    this.physics.add.collider(this.projectiles, this.debri, (projectile, debri) => {
+      projectile.destroy();
+    });
+
+    this.physics.add.overlap(this.player, this.debri, this.playerCollision, null, this);
+
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer, null, this);
+
+    this.physics.add.overlap(this.projectiles, this.enemies, this.hitEnemy, null, this);
   }
+
+  playerCollision =(player, debri) => {
+    player.setTexture('explosion');
+    player.play('explode');
+  }
+
+    hurtPlayer = (player, enemy) => {
+      this.positionShip(enemy);
+      player.x = 390;
+      player.y = 336;
+    }
+
+    hitEnemy = (projectile, enemy) => {
+      projectile.destroy();
+      this.positionShip(enemy);
+    }
 
   movePlayer = () => {
     this.player.setVelocity(0);
