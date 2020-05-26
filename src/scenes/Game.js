@@ -1,4 +1,5 @@
 import { Beam } from './Beam';
+import LeaderboardAPI from '../leaderboardAPI';
 
 export class Game extends Phaser.Scene {
   constructor(playerName) {
@@ -145,6 +146,8 @@ export class Game extends Phaser.Scene {
     // player.play("explode")
     this.physics.pause();
     this.gameLabel.visible = true;
+    alert('Game over!');
+    reload();
   }
 
     hurtPlayer = (player, enemy) => {

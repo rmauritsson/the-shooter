@@ -1,6 +1,7 @@
 import 'phaser';
 import { Beam } from './scenes/Beam';
 import Display from './display';
+import Store from './store';
 import { Intro } from './scenes/Intro';
 import { Game } from './scenes/Game';
 
@@ -24,20 +25,13 @@ const gameConfig = {
 
 Display.createDom();
 
-if (typeof localStorage !== 'undefined') {
-  document.getElementById('playerName').style.display = 'none';
-}
-
 document.querySelector('form').addEventListener('submit', (e) => {
   e.preventDefault();
+  const playerName = document.getElementById('playerName').value;
   if (localStorage.getItem('playerName') === null) {
-    const playerName = document.getElementById('playerName').value;
-    localStorage.setItem('playerName', JSON.stringify(playerName));
-    const key = JSON.parse(localStorage.getItem('playerName'));
-    alert(`Your playename is ${key}`);
+    Store.add(playerName);
   } else {
-    const key = JSON.parse(localStorage.getItem('playerName'));
-    alert(`Welcome back ${key}`);
+    Store.remove(playerName);
   }
   /* eslint-disable-next-line */
   const game = new Phaser.Game(gameConfig);
