@@ -1,4 +1,5 @@
 import 'phaser';
+import { Beam } from './scenes/Beam';
 import { Intro } from './scenes/Intro';
 import { Game } from './scenes/Game';
 
@@ -8,15 +9,15 @@ const gameConfig = {
   backgroundColor: 0x000000,
   scene: [
     Intro,
-    Game
+    Game,
   ],
   pixelArt: true,
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
-      debug: false
-    }
-  }
+      debug: false,
+    },
+  },
 };
 
 const game = new Phaser.Game(gameConfig);
