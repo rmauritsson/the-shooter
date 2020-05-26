@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/rmauritsson/the-shooter#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "phaser": "^3.23.0"
   },
   "devDependencies": {
