@@ -12,6 +12,8 @@ module.exports = {
     filename: 'app.bundle.js'
   },
 
+  devtool: 'inline-source-map',
+
   module: {
     rules: [
       {
@@ -20,7 +22,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['env'],
+            plugins: ['transform-class-properties']
           }
         }
       }
