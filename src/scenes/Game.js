@@ -18,19 +18,19 @@ export class Game extends Phaser.Scene {
     // animations
     this.anims.create({
       key: "rocinante_anim",
-      frames: this.anims.generateFrameNumbers("rocinante"),
+      frames: this.anims.generateFrameNumbers("rocinante", { start: 0, end: 1 }),
       frameRate: 10,
       repeat: -1
     })
     this.anims.create({
       key: "nauvoo_anim",
-      frames: this.anims.generateFrameNumbers("nauvoo"),
+      frames: this.anims.generateFrameNumbers("nauvoo", { start: 0, end: 1 }),
       frameRate: 10,
       repeat: -1
     })
     this.anims.create({
       key: "agatha_anim",
-      frames: this.anims.generateFrameNumbers("agatha"),
+      frames: this.anims.generateFrameNumbers("agatha", { start: 0, end: 1 }),
       frameRate: 10,
       repeat: -1
     })
@@ -42,6 +42,19 @@ export class Game extends Phaser.Scene {
       hideOnComplete: true
     });
 
+    this.anims.create({
+      key: "upwards",
+      frames: this.anims.generateFrameNumbers("debris", { start: 0, end: 1 }),
+      frameRate: 0,
+      repeat: -1
+    })
+    this.anims.create({
+      key: "downwards",
+      frames: this.anims.generateFrameNumbers("debris", { start: 2, end: 3 }),
+      frameRate: 0,
+      repeat: -1
+    })
+
     this.rocinante.play("rocinante_anim")
     this.nauvoo.play("nauvoo_anim")
     this.agatha.play("agatha_anim")
@@ -51,6 +64,26 @@ export class Game extends Phaser.Scene {
     this.agatha.setInteractive();
 
     this.input.on('gameobjectdown', this.destroyShip, this)
+
+    this.physics.world.setBoundsCollision();
+    this.debri = this.physics.add.group();
+
+    const maxDebrisObjects = 4;
+    for(let i=0; i<= maxDebrisObjects; i++){
+      let debriObject = this.physics.add.sprite(100, 100, "debris").setScale(.3)
+      this.debri.add(debriObject)
+      debriObject.setRandomPosition(0, 0, 800, 600)
+
+      if(Math.random() > 0.5){
+        debriObject.play("upwards")
+      }else {
+        debriObject.play("downwards")
+      }
+
+      debriObject.setVelocity(100, 100)
+      debriObject.setCollideWorldBounds(true)
+      debriObject.setBounce(1);
+    }
   }
 
   moveShip = (ship, speed) => {
