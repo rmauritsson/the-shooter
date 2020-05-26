@@ -84,19 +84,21 @@ export class Game extends Phaser.Scene {
 
     const maxDebrisObjects = 4;
     for (let i = 0; i <= maxDebrisObjects; i++) {
-      const debriObject = this.physics.add.sprite(100, 100, 'debris').setScale(0.3);
-      this.debri.add(debriObject);
-      debriObject.setRandomPosition(0, 0, 800, 600);
+      this.time.delayedCall(2000, () => {
+        const debriObject = this.physics.add.sprite(20, 20, 'debris').setScale(0.3);
+        this.debri.add(debriObject);
+        debriObject.setRandomPosition(0, 0, 800, 600);
 
-      if (Math.random() > 0.5) {
-        debriObject.play('upwards');
-      } else {
-        debriObject.play('downwards');
-      }
+        if (Math.random() > 0.5) {
+          debriObject.play('upwards');
+        } else {
+          debriObject.play('downwards');
+        }
 
-      debriObject.setVelocity(100, 100);
-      debriObject.setCollideWorldBounds(true);
-      debriObject.setBounce(1);
+        debriObject.setVelocity(100, 100);
+        debriObject.setCollideWorldBounds(true);
+        debriObject.setBounce(1);
+      }, [], this);
     }
 
     this.player = this.physics.add.sprite(390, 336, 'player');
@@ -139,10 +141,10 @@ export class Game extends Phaser.Scene {
 
     this.scoreLabel = this.add.bitmapText(10, 5, 'pixelFont', `SCORE ${this.score}`, 24);
 
-    this.gameLabel = this.add.text(250, 300, 'GAME OVER !', { font: '45px' });
+    this.gameLabel = this.add.text(180, 200, 'GAME OVER !', { font: '45px' });
     this.gameLabel.visible = false;
 
-    this.leaderboardText = this.add.text(400, 330, 'Loading...',
+    this.leaderboardText = this.add.text(200, 250, 'Loading...',
       {
         fontFamily: 'monospace',
         fontSize: 28,
@@ -150,22 +152,24 @@ export class Game extends Phaser.Scene {
         color: '#ffffff',
         align: 'center',
       });
+    this.leaderboardText.visible = false;
   }
 
   playerCollision =(player, debri) => {
     this.physics.pause();
-    // enemy.destroy();
+    this.rocinante.destroy('rocinante_anim');
+    this.nauvoo.destroy('nauvoo_anim');
+    this.agatha.destroy('agatha_anim');
     this.gameLabel.visible = true;
-    // LeaderboardAPI.updateLeaderboard(this.user, this.score);
-    // console.log(`${this.user} : ${this.score}`);
+    this.player.visible = false;
+    this.leaderboardText.visible = true;
 
-    const result = LeaderboardAPI.showResults(this.user, this.score);
-    console.log(result);
-
-    this.cameras.main.shake(500);
-
-    this.time.delayedCall(2000, () => {
-
+    this.cameras.main.shake(100);
+    this.time.delayedCall(2500, () => {
+      LeaderboardAPI.showResults(this.user, this.score).then(result => {
+        this.gameLabel.setText('HIGHEST SCORES \n\n');
+        this.leaderboardText.setText(result);
+      });
     }, [], this);
   }
 
