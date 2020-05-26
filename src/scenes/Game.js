@@ -6,9 +6,12 @@ export class Game extends Phaser.Scene {
   create = () => {
     this.background = this.add.tileSprite(400, 300, 800, 600, 'background');
 
-    this.rocinante = this.add.image(350, 300, "rocinante")
-    this.nauvoo = this.add.image(400, 300, "nauvoo")
-    this.agatha = this.add.image(450, 300, "agatha")
+    this.rocinante = this.add.sprite(350, 300, "rocinante")
+    this.rocinante.setScale(2)
+    this.nauvoo = this.add.sprite(400, 300, "nauvoo")
+    this.nauvoo.setScale(2)
+    this.agatha = this.add.sprite(450, 300, "agatha")
+    this.agatha.setScale(2)
 
     this.background.tilePositionY -= 0.5
   }
