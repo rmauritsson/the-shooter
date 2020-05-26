@@ -1,7 +1,7 @@
 import { Beam } from './Beam';
 
 export class Game extends Phaser.Scene {
-  constructor() {
+  constructor(playerName) {
     super('playGame');
     this.score = 0;
     this.gameOver = false;
