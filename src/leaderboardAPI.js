@@ -7,7 +7,9 @@ const LeaderboardAPI = (() => {
       mode: 'cors', headers: { 'Content-Type': 'application/json' }, method: 'POST', body: JSON.stringify({ user, score }),
     })
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {
+        // console.log(data)
+      });
   };
 
   const getResults = async () => {
@@ -30,7 +32,6 @@ const LeaderboardAPI = (() => {
           leaderboard += `${index + 1}. ${user}: ${score}\n`;
         });
       });
-    console.log(leaderboard);
     return leaderboard;
   };
 
