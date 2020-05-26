@@ -20,4 +20,7 @@ const gameConfig = {
   },
 };
 
-const game = new Phaser.Game(gameConfig);
+document.getElementById('startBtn').addEventListener('click', () => {
+  const game = new Phaser.Game(gameConfig);
+  document.getElementById('startBtn').style.display = 'none';
+});
