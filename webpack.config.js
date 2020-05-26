@@ -4,12 +4,14 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
+    'production-dependencies': ['phaser']
   },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js'
+    filename: '[name].js',
+    chunkFilename: '[name].bundle.js'
   },
 
   devtool: 'inline-source-map',
