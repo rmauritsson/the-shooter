@@ -4,6 +4,7 @@ import LeaderboardAPI from '../leaderboardAPI';
 export class Game extends Phaser.Scene {
   constructor(playerName) {
     super('playGame');
+    this.user = JSON.parse(localStorage.getItem('playerName'));
     this.score = 0;
     this.gameOver = false;
   }
@@ -136,18 +137,36 @@ export class Game extends Phaser.Scene {
     graphics.closePath();
     graphics.fillPath();
 
-    this.scoreLabel = this.add.bitmapText(10, 5, 'pixelFont', 'SCORE ', 24);
+    this.scoreLabel = this.add.bitmapText(10, 5, 'pixelFont', `SCORE ${this.score}`, 24);
 
     this.gameLabel = this.add.text(250, 300, 'GAME OVER !', { font: '45px' });
     this.gameLabel.visible = false;
+
+    this.leaderboardText = this.add.text(400, 330, 'Loading...',
+      {
+        fontFamily: 'monospace',
+        fontSize: 28,
+        fontStyle: 'bold',
+        color: '#ffffff',
+        align: 'center',
+      });
   }
 
   playerCollision =(player, debri) => {
-    // player.play("explode")
     this.physics.pause();
+    // enemy.destroy();
     this.gameLabel.visible = true;
-    alert('Game over!');
-    reload();
+    // LeaderboardAPI.updateLeaderboard(this.user, this.score);
+    // console.log(`${this.user} : ${this.score}`);
+
+    const result = LeaderboardAPI.showResults(this.user, this.score);
+    console.log(result);
+
+    this.cameras.main.shake(500);
+
+    this.time.delayedCall(2000, () => {
+
+    }, [], this);
   }
 
     hurtPlayer = (player, enemy) => {

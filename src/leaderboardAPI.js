@@ -7,22 +7,36 @@ const LeaderboardAPI = (() => {
       mode: 'cors', headers: { 'Content-Type': 'application/json' }, method: 'POST', body: JSON.stringify({ user, score }),
     })
       .then(response => response.json())
-      .then(data => {
-        // console.log(data)
-      });
+      .then(data => console.log(data));
   };
 
   const getResults = async () => {
     const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameID}/scores`, {
       mode: 'cors', method: 'GET',
-    })
-      .then(response => response.json())
-      .then(data => {
-        // console.log(data)
+    });
+
+    const result = await response.json();
+    return result;
+  };
+
+  const showResults = async (user, score) => {
+    let leaderboard = '';
+    const highscoreTable = await Promise.all([updateLeaderboard(user, score), getResults()])
+      .then((result) => {
+        const data = result[1];
+        data.result.sort((a, b) => b.score - a.score);
+        const highScores = data.result.slice(0, 5);
+        highScores.forEach(({ user, score }, index) => {
+          leaderboard += `${index + 1}. ${user}: ${score}\n`;
+        });
       });
+    console.log(leaderboard);
+    return leaderboard;
   };
 
   return {
+    updateLeaderboard,
+    showResults,
   };
 })();
 export default LeaderboardAPI;
