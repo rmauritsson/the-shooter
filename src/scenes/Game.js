@@ -135,14 +135,16 @@ export class Game extends Phaser.Scene {
     graphics.closePath();
     graphics.fillPath();
 
-    this.gameLabel = this.add.text(20, 20, 'GAME OVER !', { font: '45px Arial' });
     this.scoreLabel = this.add.bitmapText(10, 5, 'pixelFont', 'SCORE ', 24);
+
+    this.gameLabel = this.add.text(250, 300, 'GAME OVER !', { font: '45px' });
+    this.gameLabel.visible = false;
   }
 
   playerCollision =(player, debri) => {
     // player.play("explode")
     this.physics.pause();
-    // enemy.destroy();
+    this.gameLabel.visible = true;
   }
 
     hurtPlayer = (player, enemy) => {
