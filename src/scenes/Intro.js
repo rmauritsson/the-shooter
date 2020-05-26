@@ -6,6 +6,7 @@ export class Intro extends Phaser.Scene {
   preload = () => {
       this.load.image('background', 'assets/bg_space_seamless.png')
 
+      this.load.spritesheet('player','assets/sprites/player.png',{ frameWidth: 16, frameHeight: 24 });
       this.load.spritesheet('rocinante','assets/sprites/ship1.png',{ frameWidth: 16, frameHeight: 16 });
       this.load.spritesheet('nauvoo','assets/sprites/ship2.png',{ frameWidth: 16, frameHeight: 16 });
       this.load.spritesheet('agatha','assets/sprites/ship3.png',{ frameWidth: 16, frameHeight: 16 });

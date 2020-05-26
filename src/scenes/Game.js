@@ -13,8 +13,6 @@ export class Game extends Phaser.Scene {
     this.agatha = this.add.sprite(450, 300, "agatha")
     this.agatha.setScale(2)
 
-    this.background.tilePositionY -= 0.5
-
     // animations
     this.anims.create({
       key: "rocinante_anim",
@@ -54,6 +52,12 @@ export class Game extends Phaser.Scene {
       frameRate: 0,
       repeat: -1
     })
+    this.anims.create({
+      key: "thrust",
+      frames: this.anims.generateFrameNumbers("player"),
+      frameRate: 20,
+      repeat: -1
+    })
 
     this.rocinante.play("rocinante_anim")
     this.nauvoo.play("nauvoo_anim")
@@ -84,7 +88,30 @@ export class Game extends Phaser.Scene {
       debriObject.setCollideWorldBounds(true)
       debriObject.setBounce(1);
     }
+
+    this.player = this.physics.add.sprite(390, 336, "player")
+    this.player.play("thrust")
+    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this.player.setCollideWorldBounds(true)
+
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
   }
+
+  movePlayer = () => {
+      this.player.setVelocity(0);
+
+      if(this.cursorKeys.left.isDown){
+        this.player.setVelocityX(-200);
+      }else if(this.cursorKeys.right.isDown){
+        this.player.setVelocityX(200);
+      }
+
+      if(this.cursorKeys.up.isDown){
+        this.player.setVelocityY(-200);
+      }else if(this.cursorKeys.down.isDown){
+        this.player.setVelocityY(200);
+      }
+    }
 
   moveShip = (ship, speed) => {
     ship.y += speed
@@ -108,5 +135,13 @@ export class Game extends Phaser.Scene {
     this.moveShip(this.rocinante, 1)
     this.moveShip(this.nauvoo, 2)
     this.moveShip(this.agatha, 3)
+
+    this.background.tilePositionY -= 0.5
+
+    this.movePlayer();
+
+    if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+      console.log("Shots Fired");
+    }
   }
 }
