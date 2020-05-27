@@ -26,8 +26,9 @@ To get a local copy up and running follow these simple example steps.
 ### Setup
 - Clone the repository using `git clone`
 - Extract the clone and place it in the webroot of your server
-- Start your server
-- Go to your browser and type `localhost` plus the port asigned to you eg `localhost:8080`
+- Run `npm install` to generate the node_modules folder
+- Start your server using `npm run dev`
+- Go to your browser and type `localhost:8080`
 - Start playing the game
 
 ### Usage
