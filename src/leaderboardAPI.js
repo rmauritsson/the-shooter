@@ -8,8 +8,6 @@ const LeaderboardAPI = (() => {
     })
       .then(response => response.json())
       .then(data => {
-        // console.log(data)
-        console.log(`1: ${data}`);
       });
   };
 
@@ -19,7 +17,6 @@ const LeaderboardAPI = (() => {
     });
 
     const result = await response.json();
-    console.log(`2: ${result}`);
     return result;
   };
 
@@ -34,7 +31,6 @@ const LeaderboardAPI = (() => {
           leaderboard += `${index + 1}. ${user}: ${score}\n`;
         });
       });
-    console.log(`3: ${leaderboard}`);
     return leaderboard;
   };
 

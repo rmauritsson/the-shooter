@@ -1,3 +1,4 @@
+/* eslint-disable-next-line */
 import 'phaser';
 import { Beam } from './scenes/Beam';
 import Display from './display';
