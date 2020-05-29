@@ -2,7 +2,7 @@
 
 > A simple rpg game built using javascript and the game engine phaser, it follows the popular TV series the expanse.
 
-![screenshot](./app_screenshot.png)
+![screenshot](app_screenshot.png)
 
 ## Live Demo
 
